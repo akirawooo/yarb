@@ -114,9 +114,11 @@ async def init_bot(conf: dict, proxy_url=''):
     for name, v in conf.items():
         if v['enabled']:
             key = os.getenv(v['secrets']) or v['key']
+            print(key)
 
             if name == 'mail':
                 receiver = os.getenv(v['secrets_receiver']) or v['receiver']
+                print(receiver)
                 bot = globals()[f'{name}Bot'](v['address'], key, receiver, v['from'], v['server'])
                 bots.append(bot)
             elif name == 'qq':
